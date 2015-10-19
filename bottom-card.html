@@ -1,0 +1,26 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-icon-button/paper-icon-button.html">
+<link rel="import" href="../bower_components/iron-icons/iron-icons.html">
+
+
+<dom-module id="bottom-card">
+<template>
+<style>
+</style>
+
+<div>
+<paper-icon-button icon="account-balance" class="bottomicon" on-click="home"></paper-icon-button>
+</div>
+
+ </template>
+  <script>
+    Polymer({
+      is: 'bottom-card',
+	  home:function()
+	  {
+	  document.querySelector('app-service').setCategory("Home");
+	  document.querySelector('my-app').setPage("category","","Home");
+	  }
+      });
+    </script>
+    </dom-module>

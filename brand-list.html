@@ -1,0 +1,36 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="brand-card.html">
+<link rel="import" href="brand-service.html">
+<dom-module id="brand-list">
+
+  <template>
+<style is="custom-style">
+#card{
+ margin-top: 20px;
+}
+
+</style>
+    <div id="card">
+  <brand-service itemarr="{{itemarr}}"></brand-service>
+  <template  is="dom-repeat" items="{{itemarr}}">
+  <brand-card img="{{item.img}}" price="{{item.price}}" totprice="{{item.discountprice1}}" unit="{{item.unit}}" discount="{{item.discount}}" name="{{item.name}}" discountprice="{{item.discountprice}}">
+  </brand-card>
+  </template>
+    </div>
+  </template>
+
+  <script>
+    Polymer({
+      is: "brand-list",
+      ready:function()
+      {
+      //this.totprice="Rs 0";
+      }
+    });
+  </script>
+
+</dom-module>

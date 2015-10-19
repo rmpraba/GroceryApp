@@ -1,0 +1,35 @@
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<dom-module id="category-service">
+<template>
+<iron-ajax
+
+	      id="ajax"
+	      auto
+	      url="http://groceryapp.iriscouch.com/grocery/0231faf356f6525d71f94a8fad0035f5"
+	      body=""
+	      handle-as="json"
+	      content-type="application/json"
+          on-response="handleResponse"
+          debounce-duration="300"></iron-ajax>
+</template>
+  <script>
+    Polymer({
+      is: "category-service",
+      ready:function()
+      {
+		this.arr=[];
+      },
+      handleResponse:function(e)
+	  {
+	  this.arr=e.detail.response;
+	  //alert(JSON.stringify(this.arr.categoryarr));
+	  document.querySelector('category-list').categoryarr=this.arr.categoryarr;
+	  document.querySelector('category-list').reload;
+      }
+    });
+  </script>
+
+</dom-module>

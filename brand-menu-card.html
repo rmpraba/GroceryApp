@@ -1,0 +1,58 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+ <link rel="import" href="../bower_components/paper-styles/demo-pages.html">
+ <link rel="import" href="brand-service.html">
+<dom-module id="brand-menu-card">
+<template>
+<style>
+paper-card
+  	{
+  		  display: inline-block;
+          width: 500px;
+          //height: 300px;
+          border-radius: 2px;
+          box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+          background-color: white;
+          margin-top:10px;
+        }
+        paper-item {
+		      --paper-item: {
+		        cursor: pointer;
+		      };
+    }
+     .horizontal-section {
+	      padding: 0 !important;
+	    }
+
+</style>
+
+<div class="horizontal-section">
+        <paper-menu class="dropdown-content" on-iron-select="select">
+          <paper-item>Ashirvad</paper-item>
+          <paper-item>Aachi</paper-item>
+          <paper-item>Kohinoor</paper-item>
+          <paper-item>Everest</paper-item>
+          <paper-item>Nestle</paper-item>
+        </paper-menu>
+</div>
+<brand-service id="service"></brand-service>
+</template>
+<script>
+Polymer({
+
+      is: 'brand-menu-card',
+      ready:function()
+      {
+
+      },
+      select:function(e){
+      //alert("hi"+e.target.selectedItem.textContent);
+      this.$.service.callService(e.target.selectedItem.textContent);
+      document.querySelector('my-app').setPage("Brand items","page1",e.target.selectedItem.textContent);
+      }
+      });
+</script>
+</dom-module>

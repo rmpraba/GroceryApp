@@ -1,0 +1,42 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+
+<dom-module id="app-card">
+<template>
+<paper-item class="pitem" label="{{item}}" on-tap="selectCategory">{{item}}</paper-item>
+</template>
+  <script>
+  Polymer({
+        is: "app-card",
+        ready:function()
+	    {
+	    },
+	    selectCategory:function(e)
+		{
+		if(this.item=="My brands")
+		{
+		document.querySelector('my-app').setPage("My brands","page1",this.item);
+		}
+		else if(this.item=="My offers")
+		{
+		document.querySelector('my-app').setPage("My offers","page1",this.item);
+		}
+		else
+		{
+		if(localStorage.getItem("showtype")=="all")
+		{
+		document.querySelector('item-service').callService(this.item,"all");
+		document.querySelector('my-app').setPage("allitem","page1",this.item);
+		}
+		else
+		{
+		document.querySelector('offer-service').callService(this.item,"offer");
+		document.querySelector('my-app').setPage("offeritem","page1",this.item);
+		}
+		}
+
+		}
+    });
+  </script>
+</dom-module>

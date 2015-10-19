@@ -1,0 +1,20 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="app-service.html">
+<link rel="import" href="app-card.html">
+<dom-module id="app-list">
+<template>
+<app-service id="service" itemcategory="{{itemcategory}}"></app-service>
+<template is="dom-repeat" items="{{itemcategory}}" as="menu">
+<app-card item="{{menu.item}}"></app-card>
+</template>
+ </template>
+  <script>
+    Polymer({
+            is: "app-list",
+            ready:function()
+	        {
+	      }
+    });
+  </script>
+</dom-module>

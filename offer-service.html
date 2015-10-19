@@ -1,0 +1,67 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/iron-ajax/iron-ajax.html">
+<dom-module id="offer-service">
+
+  <template>
+
+ <iron-ajax
+   	      id="ajax"
+   	      url="{{url}}"
+   	      handle-as="json"
+   	      content-type="application/json"
+          on-response="handleResponse"
+          debounce-duration="300">
+ </iron-ajax>
+
+  </template>
+
+  <script>
+    Polymer({
+            is: "offer-service",
+            ready:function()
+	        {
+
+	        },
+	        handleResponse:function(e)
+	        {
+	        this.items=[];
+	        this.itemarr=[];
+	        this.items=e.detail.response;
+	        for(var i=0;i<this.items.rows.length;i++)
+	        {
+	        var itemval={"img":"","name": "","unit": "","price":"","discount":"","discountprice":"","discuntprice1":""};
+	        itemval.img=this.items.rows[i].value.img;
+		    itemval.name=this.items.rows[i].value.name;
+		    itemval.unit="1 "+this.items.rows[i].value.unit+"";
+		    itemval.price=""+this.items.rows[i].value.price+"/"+this.items.rows[i].value.unit+"";
+			itemval.discountprice=""+(parseInt(this.items.rows[i].value.price)-(parseInt(this.items.rows[i].value.price)*((parseInt(this.items.rows[i].value.offer))/100)))+"/"+this.items.rows[i].value.unit+"";
+		    itemval.discountprice1="Rs "+(parseInt(this.items.rows[i].value.price)-(parseInt(this.items.rows[i].value.price)*((parseInt(this.items.rows[i].value.offer))/100)));
+		    itemval.discount=parseInt(this.items.rows[i].value.price)-(parseInt(this.items.rows[i].value.price)*((parseInt(this.items.rows[i].value.offer))/100));
+	        this.itemarr.push(itemval);
+	  	    }
+	        document.querySelector('offer-list').itemarr=this.itemarr;
+	        document.querySelector('offer-list').reload;
+            },
+            callService:function(type,showtype)
+	        {
+            //alert("showtype: "+showtype);
+	        this.type=type;
+	        var groc=JSON.stringify(this.type);
+	        if(showtype=="all")
+	        {
+	        //alert("yes");
+	        this.url="http://groceryapp.iriscouch.com/grocery/_design/itemcategorydesign/_view/itemcategoryview?key="+groc;
+	        this.$.ajax.generateRequest();
+	        }
+	        else if(showtype=="offer")
+	        {
+	        //alert("no");
+	        this.url="http://groceryapp.iriscouch.com/grocery/_design/itemcategoryofferdesign/_view/itemcategoryofferview?key="+groc;
+	        this.$.ajax.generateRequest();
+	        }
+
+      }
+    });
+  </script>
+
+</dom-module>

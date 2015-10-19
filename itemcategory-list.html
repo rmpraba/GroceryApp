@@ -1,0 +1,30 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="itemcategory-service.html">
+<link rel="import" href="itemcategory-card.html">
+
+<dom-module id="itemcategory-list">
+<template>
+<style is="custom-style">
+</style>
+  <itemcategory-service itemarr="{{itemarr}}"></itemcategory-service>
+  <div>
+  <template is="dom-repeat" items="{{itemarr}}" as="item">
+  <itemcategory-card img="{{item.img}}" type="{{item.type}}"></itemcategory-card>
+  </template>
+  </div>
+
+
+    </template>
+    <script>
+    Polymer({
+      is: 'itemcategory-list',
+      ready:function()
+      {
+      }
+      });
+
+          </script>
+    </dom-module>

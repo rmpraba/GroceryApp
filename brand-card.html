@@ -1,0 +1,88 @@
+
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-dropdown-menu/paper-dropdown-menu.html">
+<link rel="import" href="../bower_components/paper-menu/paper-menu.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<dom-module id="brand-card">
+<template>
+ <style is="custom-style">
+ .card{
+ @apply(--layout-horizontal);
+ @apply(--layout-center);
+ position: relative;
+ }
+ .imag{
+ width : 40%;
+ }
+ img{
+ width : 100%;
+ }
+ paper-item{
+  width: 100%;
+ }
+ .detail{
+ width: 100%;
+ @apply(--layout-vertical);
+ }
+ .r1,.r2{
+ @apply(--layout-horizontal);
+ }
+ .field{
+  border-color: #B2C2F0;
+  border-radius: 2px;
+  box-shadow: rgba(0, 0, 0, 0.0980392) 0px 2px 4px, rgba(0, 0, 0, 0.0980392) 0px 0px 3px;
+  margin-top : 10px;
+ }
+ </style>
+  <fieldset class="field">
+  <legend align="left">{{name}}</legend>
+  <div class="card">
+  <div class="imag"><img src="{{img}}"/></div>
+  <div class="detail">
+  <div class="r1">
+   <paper-dropdown-menu class="dropdown" label="{{unit}}" no-label-float id="{{discount}}">
+        <paper-menu class="dropdown-content" on-iron-select="select">
+        <paper-item>1</paper-item>
+        <paper-item>2</paper-item>
+        <paper-item>3</paper-item>
+        <paper-item>5</paper-item>
+        <paper-item>10</paper-item>
+        </paper-menu>
+   </paper-dropdown-menu>
+   <div style="height:40px;">
+   <paper-item style="text-decoration: line-through;margin-left:10px;color:red;"><span style="color:black;">{{price}}</span></paper-item><br>
+   <paper-item style="margin-top: -50px;">{{discountprice}}</paper-item>
+   </div>
+   </div>
+   <div class="r2">
+   <paper-item>{{totprice}}</paper-item>
+   <paper-button style="margin-top:10px;color:red;text-transform:none;">Add</paper-button>
+  </div>
+  </div>
+  </div>
+  </fieldset>
+  </template>
+  <script>
+    Polymer({
+      is: "brand-card",
+      ready:function()
+      {
+      this.totprice="Rs "+this.totprice;
+	  //this.val="http://ekart.iriscouch.com/appdb/"+"051a4eb4097ed46fc57d2a8657000ee5";
+      },
+      select:function(e,detail){
+      //alert(document.querySelector('paper-dropdown-menu').label);
+      //this.unit=e.target.selectedItem.textContent+document.querySelector('paper-dropdown-menu').label;
+      //this.unit=e.target.selectedItem.textContent+document.querySelector('paper-dropdown-menu').label;
+      //alert(this.unit);
+      var quantity=e.target.selectedItem.textContent;
+      var discount=document.querySelector('paper-dropdown-menu').id;
+      this.totprice="Rs "+parseInt(quantity)*parseInt(this.discount);
+      }
+    });
+  </script>
+
+</dom-module>

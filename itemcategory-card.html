@@ -1,0 +1,64 @@
+<link rel="import" href="../bower_components/polymer/polymer.html">
+<link rel="import" href="../bower_components/paper-item/paper-item.html">
+<link rel="import" href="../bower_components/paper-card/paper-card.html">
+<link rel="import" href="../bower_components/paper-button/paper-button.html">
+<link rel="import" href="itemcategory-service.html">
+<link rel="import" href="item-service.html">
+<link rel="import" href="offer-service.html">
+<dom-module id="itemcategory-card">
+<template>
+<style is="custom-style">
+ .card{
+ @apply(--layout-horizontal);
+ @apply(--layout-center);
+ position: relative;
+ margin-top: 30px;
+ }
+ .imag{
+ width : 40%;
+ }
+ img{
+ width : 80%;
+ }
+ hr
+ {
+ //height:0.5px;
+ background-color: #B2C2F0;
+ }
+
+ </style>
+  <div class="vertical layout">
+  <div class="card">
+  <div class="imag"><img src="{{img}}"/></div>
+  <paper-button style="margin-top:10px;color:red;text-transform:none;" on-click="click" id="{{type}}" class="pb">{{type}}</paper-button>
+  </div>
+  <div style="margin-left:10px;">
+  <hr></div>
+  </div>
+    <item-service id="service"></item-service>
+    <offer-service id="offerservice"></offer-service>
+
+    </template>
+    <script>
+    Polymer({
+      is: 'itemcategory-card',
+      ready:function()
+      {
+      },
+      click:function()
+      {
+       if(localStorage.getItem("showtype")=="all")
+       {
+	  this.$.service.callService(this.type,localStorage.getItem("showtype"));
+	  document.querySelector('my-app').setPage("allitem","page1",this.type);
+	  }
+	  if(localStorage.getItem("showtype")=="offer")
+	   {
+	   this.$.offerservice.callService(this.type,localStorage.getItem("showtype"));
+	   document.querySelector('my-app').setPage("offeritem","page1",this.type);
+	  }
+      }
+      });
+
+          </script>
+    </dom-module>
